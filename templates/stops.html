@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Stop Management</h2>
+<form method="post" class="row g-2 mb-4">
+    <div class="col-md-3"><input class="form-control" name="stop_name" placeholder="Stop Name" required /></div>
+    <div class="col-md-3"><input class="form-control" name="area" placeholder="Area" required /></div>
+    <div class="col-md-4">
+        <select class="form-select" name="route_id" required>
+            <option value="">Select Route</option>
+            {% for r in routes %}<option value="{{ r.route_id }}">{{ r.route_name }}</option>{% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">Add Stop</button></div>
+</form>
+
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Stop</th><th>Area</th><th>Route</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for s in stops %}
+    <tr>
+        <td>{{ s.stop_id }}</td><td>{{ s.stop_name }}</td><td>{{ s.area }}</td><td>{{ s.route_name }}</td>
+        <td><a class="btn btn-sm btn-danger" href="{{ url_for('delete_record', table='stops', record_id=s.stop_id) }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

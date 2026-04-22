@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Student Management</h2>
+<form method="post" class="row g-2 mb-4">
+    <div class="col-md-3"><input class="form-control" name="student_name" placeholder="Student Name" required /></div>
+    <div class="col-md-2"><input class="form-control" name="grade" placeholder="Grade" required /></div>
+    <div class="col-md-3"><input class="form-control" name="phone" placeholder="Parent Phone" required /></div>
+    <div class="col-md-3">
+        <select class="form-select" name="stop_id" required>
+            <option value="">Select Stop</option>
+            {% for s in stops %}
+            <option value="{{ s.stop_id }}">{{ s.stop_name }} ({{ s.route_name }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-1"><button class="btn btn-primary w-100">Add</button></div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead><tr><th>ID</th><th>Name</th><th>Grade</th><th>Phone</th><th>Stop</th><th>Route</th><th>Bus</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for st in students %}
+    <tr>
+        <td>{{ st.student_id }}</td><td>{{ st.student_name }}</td><td>{{ st.grade }}</td><td>{{ st.phone }}</td><td>{{ st.stop_name }}</td><td>{{ st.route_name }}</td><td>{{ st.bus_number }}</td>
+        <td><a class="btn btn-sm btn-danger" href="{{ url_for('delete_record', table='students', record_id=st.student_id) }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
