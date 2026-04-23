@@ -234,7 +234,50 @@ def students():
     return render_template("students.html", students=student_rows, stops=stop_rows)
 
 
-@app.route("/delete/<string:table>/<int:record_id>")
+@app.route("/reports")
+def reports():
+    """Show simple analytical reports using SQL joins and grouping."""
+    connection = get_connection()
+    if not connection:
+        flash("Could not connect to database.", "danger")
+        return render_template("reports.html", student_report=[], route_counts=[])
+
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT st.student_name, st.grade, sp.stop_name, r.route_name,
+               b.bus_number, d.name AS driver_name
+        FROM students st
+        JOIN stops sp ON st.stop_id = sp.stop_id
+        JOIN routes r ON sp.route_id = r.route_id
+        JOIN buses b ON r.bus_id = b.bus_id
+        JOIN drivers d ON r.driver_id = d.driver_id
+        ORDER BY st.student_name
+        """
+    )
+    student_report = cursor.fetchall()
+
+    cursor.execute(
+        """
+        SELECT r.route_name, COUNT(st.student_id) AS student_count
+        FROM routes r
+        LEFT JOIN stops sp ON r.route_id = sp.route_id
+        LEFT JOIN students st ON sp.stop_id = st.stop_id
+        GROUP BY r.route_id, r.route_name
+        ORDER BY r.route_name
+        """
+    )
+    route_counts = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return render_template(
+        "reports.html",
+        student_report=student_report,
+        route_counts=route_counts,
+    )
+
+
+@app.route("/delete/<string:table>/<int:record_id>", methods=["POST"])
 def delete_record(table, record_id):
     """Simple delete endpoint for demo purposes."""
     allowed = {

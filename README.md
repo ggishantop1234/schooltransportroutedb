@@ -121,6 +121,12 @@ python app.py
 
 Open browser: `http://127.0.0.1:5000`
 
+Run tests:
+
+```bash
+pytest
+```
+
 ---
 
 ## 9) CRUD + SQL Query Coverage
@@ -138,7 +144,7 @@ UPDATE buses SET capacity = 42 WHERE bus_id = 1;
 ```
 
 ### DELETE
-- Delete buttons in UI.
+- Delete buttons in UI (implemented using **POST** for safer deletion).
 
 ### SELECT with JOIN
 ```sql
@@ -164,12 +170,15 @@ schooltransportroutedb/
 │   └── sample_data.sql
 ├── static/
 │   └── style.css
+├── tests/
+│   └── test_app.py
 └── templates/
     ├── base.html
     ├── index.html
     ├── buses.html
     ├── drivers.html
     ├── routes.html
+    ├── reports.html
     ├── stops.html
     └── students.html
 ```
@@ -184,6 +193,7 @@ Use these headings when adding screenshots in report:
 4. **Route Management**: Assign bus + driver to route.
 5. **Stop Management**: Add stops route-wise.
 6. **Student Management**: Allocate student to stop and view route/bus via JOIN.
+7. **Reports Page**: Route-wise student count and complete student allocation report.
 
 ---
 

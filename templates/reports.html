@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Transport Reports</h2>
+
+<div class="card p-3 mb-4">
+    <h5 class="mb-3">Route-wise Student Count</h5>
+    <table class="table table-bordered mb-0">
+        <thead><tr><th>Route</th><th>Total Students</th></tr></thead>
+        <tbody>
+        {% for row in route_counts %}
+        <tr><td>{{ row.route_name }}</td><td>{{ row.student_count }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card p-3">
+    <h5 class="mb-3">Student Allocation Report (JOIN)</h5>
+    <table class="table table-striped table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>Student</th><th>Grade</th><th>Stop</th><th>Route</th><th>Bus</th><th>Driver</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in student_report %}
+        <tr>
+            <td>{{ row.student_name }}</td>
+            <td>{{ row.grade }}</td>
+            <td>{{ row.stop_name }}</td>
+            <td>{{ row.route_name }}</td>
+            <td>{{ row.bus_number }}</td>
+            <td>{{ row.driver_name }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

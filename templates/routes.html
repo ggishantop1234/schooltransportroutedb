@@ -26,7 +26,11 @@
     {% for r in routes %}
     <tr>
         <td>{{ r.route_id }}</td><td>{{ r.route_name }}</td><td>{{ r.start_point }}</td><td>{{ r.end_point }}</td><td>{{ r.bus_number }}</td><td>{{ r.driver_name }}</td>
-        <td><a class="btn btn-sm btn-danger" href="{{ url_for('delete_record', table='routes', record_id=r.route_id) }}">Delete</a></td>
+        <td>
+            <form method="post" action="{{ url_for('delete_record', table='routes', record_id=r.route_id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>

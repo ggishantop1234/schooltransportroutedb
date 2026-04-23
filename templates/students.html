@@ -22,7 +22,11 @@
     {% for st in students %}
     <tr>
         <td>{{ st.student_id }}</td><td>{{ st.student_name }}</td><td>{{ st.grade }}</td><td>{{ st.phone }}</td><td>{{ st.stop_name }}</td><td>{{ st.route_name }}</td><td>{{ st.bus_number }}</td>
-        <td><a class="btn btn-sm btn-danger" href="{{ url_for('delete_record', table='students', record_id=st.student_id) }}">Delete</a></td>
+        <td>
+            <form method="post" action="{{ url_for('delete_record', table='students', record_id=st.student_id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>

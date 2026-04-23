@@ -19,7 +19,11 @@
     {% for s in stops %}
     <tr>
         <td>{{ s.stop_id }}</td><td>{{ s.stop_name }}</td><td>{{ s.area }}</td><td>{{ s.route_name }}</td>
-        <td><a class="btn btn-sm btn-danger" href="{{ url_for('delete_record', table='stops', record_id=s.stop_id) }}">Delete</a></td>
+        <td>
+            <form method="post" action="{{ url_for('delete_record', table='stops', record_id=s.stop_id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
