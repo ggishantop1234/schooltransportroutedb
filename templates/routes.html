@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Route Management</h2>
+<form method="post" class="row g-2 mb-4">
+    <div class="col-md-2"><input class="form-control" name="route_name" placeholder="Route Name" required /></div>
+    <div class="col-md-2"><input class="form-control" name="start_point" placeholder="Start Point" required /></div>
+    <div class="col-md-2"><input class="form-control" name="end_point" placeholder="End Point" required /></div>
+    <div class="col-md-2">
+        <select class="form-select" name="bus_id" required>
+            <option value="">Select Bus</option>
+            {% for b in buses %}<option value="{{ b.bus_id }}">{{ b.bus_number }}</option>{% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select class="form-select" name="driver_id" required>
+            <option value="">Select Driver</option>
+            {% for d in drivers %}<option value="{{ d.driver_id }}">{{ d.name }}</option>{% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">Add Route</button></div>
+</form>
+
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Route</th><th>From</th><th>To</th><th>Bus</th><th>Driver</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for r in routes %}
+    <tr>
+        <td>{{ r.route_id }}</td><td>{{ r.route_name }}</td><td>{{ r.start_point }}</td><td>{{ r.end_point }}</td><td>{{ r.bus_number }}</td><td>{{ r.driver_name }}</td>
+        <td>
+            <form method="post" action="{{ url_for('delete_record', table='routes', record_id=r.route_id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

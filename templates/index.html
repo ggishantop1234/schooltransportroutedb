@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row g-3">
+    <div class="col-md-3"><div class="card p-3"><h6>Total Students</h6><h3>{{ stats.students }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Total Buses</h6><h3>{{ stats.buses }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Total Routes</h6><h3>{{ stats.routes }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-3"><h6>Total Drivers</h6><h3>{{ stats.drivers }}</h3></div></div>
+</div>
+
+<div class="mt-4">
+    <h5>Mini Project Modules</h5>
+    <ul>
+        <li>Bus Management</li>
+        <li>Driver Management</li>
+        <li>Route & Stop Management</li>
+        <li>Student Stop Allocation</li>
+        <li>Transport Report using SQL JOINs</li>
+    </ul>
+</div>
+{% endblock %}

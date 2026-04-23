@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Driver Management</h2>
+<form method="post" class="row g-2 mb-4">
+    <div class="col-md-4"><input class="form-control" name="name" placeholder="Driver Name" required /></div>
+    <div class="col-md-3"><input class="form-control" name="phone" placeholder="Phone" required /></div>
+    <div class="col-md-3"><input class="form-control" name="license_no" placeholder="License Number" required /></div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">Add Driver</button></div>
+</form>
+
+<table class="table table-bordered">
+    <thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>License</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for d in drivers %}
+    <tr>
+        <td>{{ d.driver_id }}</td><td>{{ d.name }}</td><td>{{ d.phone }}</td><td>{{ d.license_no }}</td>
+        <td>
+            <form method="post" action="{{ url_for('delete_record', table='drivers', record_id=d.driver_id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
