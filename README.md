@@ -4,6 +4,21 @@ A complete beginner-friendly DBMS mini project using **MySQL + Python Flask**.
 
 ---
 
+## Project Description
+This project is a web-based database management system for school transport operations. It helps school admins manage buses, drivers, routes, stops, and student transport allocations from one dashboard. The application demonstrates relational modeling, foreign-key integrity, CRUD operations, and SQL JOIN-based reporting in a practical real-world scenario.
+
+### Key Features
+- Manage buses and driver records.
+- Assign buses and drivers to routes.
+- Add route-wise stops and map students to pickup stops.
+- View transport reports with JOINs and route-wise student counts.
+- Maintain data integrity using primary keys, unique constraints, and foreign keys.
+
+### ER Diagram (Generated Image)
+![School Transport ER Diagram](assets/er-diagram-school-transport.svg)
+
+---
+
 ## 1) Problem Statement
 Schools often manage transport records manually, causing route confusion, student pickup errors, and poor bus/driver utilization. This project digitizes the process by tracking buses, drivers, routes, stops, and student allocations in one relational database with a simple web interface.
 
